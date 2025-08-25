@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <title><%= content_for(:title) || "Bisan" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -22,9 +22,45 @@
     <%= javascript_include_tag "/assets/application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
-  </body>
+  <body class="">
+  <!-- Header -->
+  <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b">
+    <div class="container mx-auto px-5 h-16 flex items-center justify-between">
+      <%= link_to (content_for(:title) || "Bisan"), root_path, class: "text-lg font-semibold" %>
+
+      <!-- Locale switcher -->
+      <nav aria-label="Language">
+        <ul class="flex items-center gap-2 list-none m-0 p-0">
+          <% I18n.available_locales.each do |locale| %>
+            <li>
+              <% active = I18n.locale == locale %>
+              <% label  = t(locale, scope: "locales", default: locale.to_s.upcase) %>
+
+              <% if active %>
+                <span
+                  aria-current="page"
+                  class="inline-flex items-center rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-sm font-medium text-gray-900"
+                  title="<%= label %>"
+                >
+                  <%= label %>
+                </span>
+              <% else %>
+                <%= link_to label,
+                            url_for(locale: locale),
+                            class: "inline-flex items-center rounded-full border border-gray-300 px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50 transition",
+                            hreflang: locale,
+                            lang: locale %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="container mx-auto mt-28 px-5">
+    <%= yield %>
+  </main>
+</body>
 </html>

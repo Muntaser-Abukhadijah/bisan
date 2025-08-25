@@ -38,5 +38,8 @@ module Bisan
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.i18n.available_locales = %i[ar en]
+    config.i18n.default_locale = :ar
   end
 end

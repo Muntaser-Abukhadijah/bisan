@@ -22,3 +22,31 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+*****
+## 25/Aug/2025
+* Create artical model to represet artical data. [:Done]
+    * Artical fields: (title, image, excerpt, author, category, publish-date) [:Done]
+    * Migrte to SQLlit database. [:Done]
+    * Seed data [:Done]
+* Build articals view.
+    * View file [:Done]
+    * Build artical card. [:Done]
+* Add pagination to the articals page. [:Done]
+
+
+## ToDo
+1. Update articals card to 
+    1.1 When clicking on tag it should link to page shows all articas with such tag/catigrory.
+    1.2 When clicking on author it should link to page shows all articas with such author.
+2. Search in Articals page.
+3. Update the pagination style.
+4. Add langauge support.
+5. Lokalise—a platform that simplifies managing and editing localization files. Let’s walk through the setup.
+6. RTL
+
+
+
+
+
