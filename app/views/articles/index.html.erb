@@ -1,13 +1,7 @@
-<h1>All Articles</h1>
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <h1 class="mb-6 text-2xl font-bold text-gray-900">All Articles</h1>
 
-<ul>
-  <% @articles.each do |article| %>
-    <li>
-      <strong><%= link_to article.title, article_path(article) %></strong><br>
-      <em>by <%= article.author %></em> | <%= article.category %> | 
-      Published: <%= article.publish_date %>
-      <p><%= article.excerpt %></p>
-    </li>
-    <hr>
-  <% end %>
-</ul>
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <%= render partial: "card", collection: @articles, as: :article %>
+  </div>
+</div>
