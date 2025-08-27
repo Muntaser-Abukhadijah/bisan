@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<%= I18n.locale %>">
+<html lang="<%= I18n.locale %>" dir="<%= page_dir %>">
   <head>
     <title><%= content_for(:title) || "Bisan" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -22,7 +22,7 @@
     <%= javascript_include_tag "/assets/application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class="">
+  <body class="<%= 'rtl' if page_dir == 'rtl' %>">
   <!-- Header -->
   <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b">
     <div class="container mx-auto px-5 h-16 flex items-center justify-between">

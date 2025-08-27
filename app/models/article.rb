@@ -1,5 +1,5 @@
 class Article < ApplicationRecord
-  include MeiliSearch::Rails
+  include Meilisearch::Rails
   extend Pagy::Meilisearch
 
   meilisearch do
