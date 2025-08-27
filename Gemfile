@@ -61,3 +61,4 @@ end
 gem "tailwindcss-rails", "~> 4.3"
 gem "pagy"
 gem "rails-i18n"
+gem "meilisearch-rails"

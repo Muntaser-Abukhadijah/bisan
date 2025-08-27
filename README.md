@@ -34,6 +34,7 @@ Things you may want to cover:
     * View file [:Done]
     * Build artical card. [:Done]
 * Add pagination to the articals page. [:Done]
+* Add internationalization support [:Done]
 
 
 ## ToDo
@@ -44,7 +45,7 @@ Things you may want to cover:
 3. Update the pagination style.
 4. Add langauge support.
 5. Lokalise—a platform that simplifies managing and editing localization files. Let’s walk through the setup.
-6. RTL
+6. Add RTL.
 
 
 
