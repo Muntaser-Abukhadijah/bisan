@@ -8,9 +8,11 @@
         type="search"
         name="q"
         value="<%= params[:q] %>"
+        dir="auto"
+        lang="<%= I18n.locale %>"
         placeholder="<%= t('.search_placeholder', default: 'Search articles…') %>"
-        class="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:border-gray-500 focus:outline-none"
-      />
+        class="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:border-gray-500 focus:outline-none text-start"
+        />
       <button
         type="submit"
         class="rounded-md bg-gray-900 px-4 py-2 text-white hover:bg-gray-800"
