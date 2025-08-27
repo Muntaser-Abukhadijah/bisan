@@ -1,11 +1,47 @@
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-  <h1 class="mb-6 text-2xl font-bold text-gray-900"> <%= t ".articles" %> </h1>
+  <h1 class="mb-6 text-2xl font-bold text-gray-900"><%= t(".articles") %></h1>
 
+  <!-- Search form (GET) -->
+  <%= form_with url: articles_path, method: :get, local: true, role: "search", class: "mb-6" do %>
+    <div class="flex gap-2">
+      <input
+        type="search"
+        name="q"
+        value="<%= params[:q] %>"
+        placeholder="<%= t('.search_placeholder', default: 'Search articles…') %>"
+        class="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:border-gray-500 focus:outline-none"
+      />
+      <button
+        type="submit"
+        class="rounded-md bg-gray-900 px-4 py-2 text-white hover:bg-gray-800"
+      >
+        <%= t('.search', default: 'Search') %>
+      </button>
+      <% if params[:q].present? %>
+        <a
+          href="<%= articles_path %>"
+          class="rounded-md border border-gray-300 px-4 py-2 hover:bg-gray-50"
+        >
+          <%= t('.clear', default: 'Clear') %>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- Results -->
   <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    <%= render partial: "card", collection: @articles, as: :article %>
+    <% @articles.each do |article| %>
+      <%# If you enabled attributes_to_highlight/crop, Meilisearch adds formatted snippets %>
+      <% formatted = (article.respond_to?(:formatted) ? article.formatted : nil) %>
+
+      <%= render partial: "card", locals: {
+            article: article,
+            formatted: formatted
+          } %>
+    <% end %>
   </div>
 
-    <div class="mt-6 flex justify-center">
-        <%== pagy_nav(@pagy) %>
-    </div>
+  <div class="mt-6 flex justify-center">
+    <%== pagy_nav(@pagy) %>
+  </div>
 </div>

@@ -1,8 +1,8 @@
-<%# locals: article %>
+<%# locals: article, formatted (optional) %>
 <%= link_to article_path(article), class: "block rounded-2xl overflow-hidden bg-white shadow hover:shadow-lg transition" do %>
   <div class="aspect-[16/9] bg-gray-100">
     <% if article.image.present? %>
-    <%= image_tag article.image, alt: article.title, class: "h-full w-full object-cover" %>
+      <%= image_tag article.image, alt: article.title, class: "h-full w-full object-cover" %>
     <% else %>
       <div class="h-full w-full grid place-items-center text-gray-400">
         No image
@@ -23,11 +23,19 @@
     </div>
 
     <h3 class="text-lg font-semibold leading-snug text-gray-900 line-clamp-2">
-      <%= article.title %>
+      <% if local_assigns[:formatted]&.dig("title") %>
+        <%= raw formatted["title"] %>   <%# highlight-aware %>
+      <% else %>
+        <%= article.title %>
+      <% end %>
     </h3>
 
     <p class="mt-2 text-gray-600 line-clamp-3">
-      <%= article.excerpt %>
+      <% if local_assigns[:formatted]&.dig("excerpt") %>
+        <%= raw formatted["excerpt"] %> <%# highlight-aware %>
+      <% else %>
+        <%= article.excerpt %>
+      <% end %>
     </p>
 
     <div class="mt-4 text-sm text-gray-500">
