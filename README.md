@@ -36,16 +36,21 @@ Things you may want to cover:
 * Add pagination to the articals page. [:Done]
 * Add internationalization support [:Done]
 
+## 27/Aug/2025
+* Search in Articals page using meilisearch [:Done]
+
+
 
 ## ToDo
 1. Update articals card to 
     1.1 When clicking on tag it should link to page shows all articas with such tag/catigrory.
     1.2 When clicking on author it should link to page shows all articas with such author.
-2. Search in Articals page.
+2. Search in Articals page. 
 3. Update the pagination style.
-4. Add langauge support.
+4. Add langauge support. (I think translation support)
 5. Lokalise—a platform that simplifies managing and editing localization files. Let’s walk through the setup.
 6. Add RTL.
+7. Deploy to Render
 
 
 
