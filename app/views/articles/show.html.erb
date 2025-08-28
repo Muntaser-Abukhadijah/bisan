@@ -1,0 +1,77 @@
+<%# --- Title --- %>
+<h1 class="text-3xl font-bold tracking-tight mb-3 text-center">
+  <%= @article.title %>
+</h1>
+
+<%# --- Meta row: source link • publish date • category --- %>
+<div class="flex flex-wrap justify-center items-center gap-3 text-sm text-gray-500 mb-6">
+  <% if @article.source_url.present? %>
+    <%= link_to t("articles.source", default: "Source"),
+                @article.source_url,
+                target: "_blank", rel: "noopener noreferrer",
+                class: "underline hover:no-underline" %>
+    <span aria-hidden="true">•</span>
+  <% end %>
+
+  <% if @article.publish_date.present? %>
+    <time datetime="<%= @article.publish_date %>">
+      <%= l(@article.publish_date, format: :long) %>
+    </time>
+    <% if @article.category.present? %>
+      <span aria-hidden="true">•</span>
+    <% end %>
+  <% end %>
+
+  <% if @article.category.present? %>
+    <%= link_to @article.category,
+                articles_path(category: @article.category),
+                class: "inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium hover:bg-gray-200" %>
+  <% end %>
+</div>
+
+<%# --- Cover image --- %>
+<% if @article.article_image.present? %>
+  <div class="mb-6 mx-auto max-w-2xl overflow-hidden rounded-2xl shadow">
+    <%= image_tag @article.article_image,
+                  alt: @article.title,
+                  class: "w-full h-auto object-cover" %>
+  </div>
+<% end %>
+
+<%# --- Author block --- %>
+<div class="flex items-center gap-3 mb-8">
+  <% if @article.author_image.present? %>
+    <%= image_tag @article.author_image,
+                  alt: @article.author.presence || "Author",
+                  class: "h-10 w-10 rounded-full object-cover" %>
+  <% else %>
+    <div class="h-10 w-10 rounded-full bg-gray-200"></div>
+  <% end %>
+  <div class="text-sm">
+    <div class="font-medium text-gray-900">
+      <%= @article.author.presence || t("articles.unknown_author", default: "Unknown author") %>
+    </div>
+  </div>
+</div>
+
+<%# --- Body (sanitized) --- %>
+<article class="prose prose-neutral max-w-none">
+  <%= sanitize(
+        @article.body.to_s,
+        tags: %w[p br a strong em ul ol li h2 h3 h4 blockquote img code pre figure figcaption table thead tbody tr th td],
+        attributes: %w[href src alt title class]
+      ) %>
+</article>
+
+<%# --- Tags --- %>
+<%# Uses Article#tag_list if you added it; otherwise split here %>
+<% tags = @article.respond_to?(:tag_list) ? @article.tag_list : (@article.tags.to_s.split(",").map(&:strip)) %>
+<% if tags.any? %>
+  <div class="mt-10 flex flex-wrap gap-2">
+    <% tags.each do |tag| %>
+      <%= link_to "##{tag}",
+                  articles_path(tag: tag),
+                  class: "inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium hover:bg-gray-200" %>
+    <% end %>
+  </div>
+<% end %>

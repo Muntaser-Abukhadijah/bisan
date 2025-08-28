@@ -10,15 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_093327) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_28_102639) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
-    t.string "image"
+    t.string "article_image"
     t.text "excerpt"
     t.string "author"
     t.string "category"
     t.date "publish_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "body"
+    t.string "source_url"
+    t.string "author_image"
+    t.string "tags"
   end
 end
