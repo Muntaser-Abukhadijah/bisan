@@ -38,19 +38,28 @@ Things you may want to cover:
 
 ## 27/Aug/2025
 * Search in Articals page using meilisearch [:Done]
+* Add RTL. [:Done]
+
+## 28/Aug/2025
+* Build Artical body page [:Done]
+* Review and define list of task to be completed before adding actual data.
+    * List of tasks:
+        * Arabic as default language. 
 
 
-
-## ToDo
-1. Update articals card to 
+## ToDo (Item - [Priorty 1-10])
+* Update articals card to 
     1.1 When clicking on tag it should link to page shows all articas with such tag/catigrory.
     1.2 When clicking on author it should link to page shows all articas with such author.
-2. Search in Articals page. 
-3. Update the pagination style.
-4. Add langauge support. (I think translation support)
-5. Lokalise—a platform that simplifies managing and editing localization files. Let’s walk through the setup.
-6. Add RTL.
-7. Deploy to Render
+* Update the pagination style.
+* Add langauge support. (I think translation support)
+* Lokalise—a platform that simplifies managing and editing localization files. Let’s walk through the setup.
+* Deploy to Render
+* Refactor Search bar to be reusable, partial.
+* [Put a plan for two weeks and review it with Ali] - [10]
+* Build Artical body page - [9]
+
+
 
 
 

@@ -1,8 +1,8 @@
 <%# locals: article, formatted (optional) %>
 <%= link_to article_path(article), class: "block rounded-2xl overflow-hidden bg-white shadow hover:shadow-lg transition" do %>
   <div class="aspect-[16/9] bg-gray-100">
-    <% if article.image.present? %>
-      <%= image_tag article.image, alt: article.title, class: "h-full w-full object-cover" %>
+    <% if article.article_image.present? %>
+      <%= image_tag article.article_image, alt: article.title, class: "h-full w-full object-cover" %>
     <% else %>
       <div class="h-full w-full grid place-items-center text-gray-400">
         No image

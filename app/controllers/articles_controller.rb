@@ -15,5 +15,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @article = Article.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to articles_path, alert: I18n.t("articles.not_found", default: "Article not found.")
   end
 end
