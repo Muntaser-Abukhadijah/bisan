@@ -1,7 +1,15 @@
 ar:
   articles:
     index:
-      articles: "كل المقالات"
+      articles: "المقالات"
+      search: "أبحث"
+      clear: "مسح"
+      search_placeholder: "أبحث في المقالات..."
+    card:
+      by: "بواسطة"
+  app_name: "بيسان"
+  all_rights_reserved: "جميع الحقوق محفوظة"
+  privacy_policy: "سياسة الخصوصية"
   locales:
     en: "English"
-    ar: "Arabic"
+    ar: "العربية"

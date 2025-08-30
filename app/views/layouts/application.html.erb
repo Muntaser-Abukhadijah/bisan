@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>" dir="<%= page_dir %>">
   <head>
-    <title><%= content_for(:title) || "Bisan" %></title>
+    <title><%= content_for(:title) || t('app_name') %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -26,7 +26,7 @@
   <!-- Header -->
   <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b">
     <div class="container mx-auto px-5 h-16 flex items-center justify-between">
-      <%= link_to (content_for(:title) || "Bisan"), root_path, class: "text-lg font-semibold" %>
+    <%= link_to (content_for(:title) || t('app_name')), root_path, class: "text-lg font-semibold" %>
 
       <!-- Locale switcher -->
       <nav aria-label="Language">
@@ -62,5 +62,18 @@
   <main class="container mx-auto mt-28 px-5">
     <%= yield %>
   </main>
+
+    <!-- Footer -->
+  <footer class="mt-16 border-t bg-white">
+    <div class="container mx-auto px-5 py-6 flex flex-col md:flex-row items-center justify-between text-sm text-gray-600">
+      
+      <!-- Copyright -->
+      <div class="mb-4 md:mb-0 text-center md:text-left">
+        © 2024–2025 <%= t("app_name", default: "Bisan") %>. <%= t("all_rights_reserved", default: "All rights reserved.") %> |
+        <%= link_to t("privacy_policy", default: "Privacy Policy"), "/privacy", class: "hover:underline" %>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>

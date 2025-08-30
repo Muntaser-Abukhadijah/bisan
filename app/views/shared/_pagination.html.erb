@@ -1,0 +1,16 @@
+<% if @pagy.pages > 1 %>
+  <nav class="flex gap-1 justify-center" aria-label="Pagination">
+    <% @pagy.series.each do |item| %>
+      <% case item
+         when Integer %>
+          <%= link_to item,
+                      pagy_url_for(@pagy, item),
+                      class: "px-3 py-1 border rounded hover:bg-gray-50 #{'bg-gray-900 text-white' if item == @pagy.page}" %>
+      <% when String %>
+        <span class="px-3 py-1 border rounded bg-gray-900 text-white"><%= item %></span>
+      <% when :gap %>
+        <span class="px-2 py-1">…</span>
+      <% end %>
+    <% end %>
+  </nav>
+<% end %>

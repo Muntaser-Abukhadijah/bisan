@@ -39,7 +39,7 @@
     </p>
 
     <div class="mt-4 text-sm text-gray-500">
-      by <span class="font-medium text-gray-700"><%= article.author %></span>
+      <%= t(".by", default: "by") %> <span class="font-medium text-gray-700"><%= article.author %></span>
     </div>
   </div>
 <% end %>
