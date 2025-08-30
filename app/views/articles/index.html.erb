@@ -8,7 +8,7 @@
         type="search"
         name="q"
         value="<%= params[:q] %>"
-        dir="auto"
+        dir=<%= page_dir %>
         lang="<%= I18n.locale %>"
         placeholder="<%= t('.search_placeholder', default: 'Search articles…') %>"
         class="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:border-gray-500 focus:outline-none text-start"
@@ -43,7 +43,7 @@
     <% end %>
   </div>
 
-  <div class="mt-6 flex justify-center">
-    <%== pagy_nav(@pagy) %>
+  <div class="mt-6">
+    <%= render "shared/pagination" %>
   </div>
 </div>

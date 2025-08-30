@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_28_102639) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_30_123458) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.string "article_image"
     t.text "excerpt"
-    t.string "author"
     t.string "category"
     t.date "publish_date"
     t.datetime "created_at", null: false
@@ -24,5 +23,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_102639) do
     t.string "source_url"
     t.string "author_image"
     t.string "tags"
+    t.string "author"
+    t.integer "author_id"
+    t.index ["author_id"], name: "index_articles_on_author_id"
   end
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "bio"
+    t.string "avatar_url"
+    t.json "social_links", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "articles", "authors"
 end
