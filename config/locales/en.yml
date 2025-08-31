@@ -7,6 +7,15 @@ en:
       search_placeholder: "Search articles…"
     card:
       by: "by"
+  
+  authors:
+    index:
+      title: "Authors"
+    view_profile: "View author"
+    article_count:
+      one: "%{count} article"
+      other: "%{count} articles"
+
   app_name: "Bisan"
   all_rights_reserved: "All rights reserved"
   privacy_policy: "Privacy Policy"

@@ -3,7 +3,8 @@
 <section class="rounded-xl border p-6">
   <div class="flex items-center gap-4">
     <% if @author.avatar_url.present? %>
-      <img src="<%= @author.avatar_url %>" alt="<%= @author.name %>" class="w-16 h-16 rounded-full object-cover" />
+      <img src="<%= @author.avatar_url %>" alt="<%= @author.name %>"
+           class="w-16 h-16 rounded-full object-cover" />
     <% else %>
       <div class="w-16 h-16 rounded-full bg-gray-200"></div>
     <% end %>
@@ -14,9 +15,10 @@
       <% end %>
       <% if @author.social_links.present? %>
         <div class="mt-2 flex gap-3 text-sm">
-          <% @author.social_links.each do |label, url| %>
-            <% next if url.blank? %>
-            <%= link_to label.to_s.titleize, url, target: "_blank", rel: "noopener", class: "underline hover:no-underline" %>
+          <% @author.social_links.each do |label, url|
+               next if url.blank? %>
+            <%= link_to label.to_s.titleize, url, target: "_blank",
+                        rel: "noopener", class: "underline hover:no-underline" %>
           <% end %>
         </div>
       <% end %>
@@ -24,11 +26,14 @@
   </div>
 </section>
 
-<div class="mt-6 space-y-4">
+<!-- GRID of existing article cards -->
+<ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
   <% @articles.each do |article| %>
-    <%= render "articles/card", article: article %>
+    <li class="h-full">
+      <%= render "articles/card", article: article %>
+    </li>
   <% end %>
-</div>
+</ul>
 
 <div class="mt-6">
   <%= render "shared/pagination", pagy: @pagy %>

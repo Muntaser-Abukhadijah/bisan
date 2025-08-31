@@ -7,6 +7,19 @@ ar:
       search_placeholder: "أبحث في المقالات..."
     card:
       by: "بواسطة"
+
+  authors:
+    index:
+      title: "الكتّاب"
+    view_profile: "صفحة الكاتب"
+    article_count:
+      zero: "لا مقالات"
+      one: "مقالة واحدة"
+      two: "مقالتان"
+      few: "%{count} مقالات"
+      many: "%{count} مقالة"
+      other: "%{count} مقالة"
+  
   app_name: "بيسان"
   all_rights_reserved: "جميع الحقوق محفوظة"
   privacy_policy: "سياسة الخصوصية"
