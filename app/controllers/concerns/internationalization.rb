@@ -8,7 +8,7 @@ module Internationalization
     private
 
     def switch_locale(&action)
-      locale = locale_from_url || locale_from_headers || I18n.default_locale
+      locale = locale_from_url || I18n.default_locale || locale_from_headers
       response.set_header "Content-Language", locale
       I18n.with_locale(locale, &action)
     end

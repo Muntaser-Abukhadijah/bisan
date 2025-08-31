@@ -15,7 +15,7 @@
 
   <% if @article.publish_date.present? %>
     <time datetime="<%= @article.publish_date %>">
-      <%= l(@article.publish_date, format: :long) %>
+      <%= l(@article.publish_date, format: :long) rescue @article.publish_date %>
     </time>
     <% if @article.category.present? %>
       <span aria-hidden="true">•</span>
@@ -24,7 +24,7 @@
 
   <% if @article.category.present? %>
     <%= link_to @article.category,
-                articles_path(category: @article.category),
+                articles_path(locale: I18n.locale, category: @article.category),
                 class: "inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium hover:bg-gray-200" %>
   <% end %>
 </div>
@@ -38,18 +38,21 @@
   </div>
 <% end %>
 
-<%# --- Author block --- %>
+<%# --- Author block (uses association) --- %>
+<% a = @article.author %>
 <div class="flex items-center gap-3 mb-8">
-  <% if @article.author_image.present? %>
-    <%= image_tag @article.author_image,
-                  alt: @article.author.presence || "Author",
-                  class: "h-10 w-10 rounded-full object-cover" %>
+  <% if a&.avatar_url.present? %>
+    <%= image_tag a.avatar_url, alt: a.name, class: "h-10 w-10 rounded-full object-cover" %>
   <% else %>
     <div class="h-10 w-10 rounded-full bg-gray-200"></div>
   <% end %>
   <div class="text-sm">
     <div class="font-medium text-gray-900">
-      <%= @article.author.presence || t("articles.unknown_author", default: "Unknown author") %>
+      <% if a %>
+        <%= link_to a.name, author_path(I18n.locale, a), class: "hover:underline" %>
+      <% else %>
+        <%= t("articles.unknown_author", default: "Unknown author") %>
+      <% end %>
     </div>
   </div>
 </div>
@@ -63,14 +66,13 @@
       ) %>
 </article>
 
-<%# --- Tags --- %>
-<%# Uses Article#tag_list if you added it; otherwise split here %>
-<% tags = @article.respond_to?(:tag_list) ? @article.tag_list : (@article.tags.to_s.split(",").map(&:strip)) %>
+<%# --- Tags (string column; split on commas) --- %>
+<% tags = @article.respond_to?(:tag_list) ? @article.tag_list : (@article.tags.to_s.split(",").map(&:strip).reject(&:blank?)) %>
 <% if tags.any? %>
   <div class="mt-10 flex flex-wrap gap-2">
     <% tags.each do |tag| %>
       <%= link_to "##{tag}",
-                  articles_path(tag: tag),
+                  articles_path(locale: I18n.locale, tag: tag),
                   class: "inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium hover:bg-gray-200" %>
     <% end %>
   </div>

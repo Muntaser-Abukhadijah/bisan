@@ -1,0 +1,30 @@
+<% content_for :title, t("authors.index.title", default: "Authors") %>
+
+<h1 class="text-2xl font-bold mb-4"><%= t("authors.index.title", default: "Authors") %></h1>
+
+<ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  <% @authors.
+       each do |author|
+         count = author.articles.count
+  %>
+    <li class="rounded-xl border p-4">
+      <div class="flex items-center gap-3">
+        <% if author.avatar_url.present? %>
+          <img src="<%= author.avatar_url %>" alt="<%= author.name %>" class="w-12 h-12 rounded-full object-cover" />
+        <% else %>
+          <div class="w-12 h-12 rounded-full bg-gray-200"></div>
+        <% end %>
+        <div>
+          <h2 class="font-semibold">
+            <%= link_to author.name, author_path(I18n.locale, author), class: "hover:underline" %>
+          </h2>
+          <p class="text-sm text-gray-600"><%= count %> <%= "article".pluralize(count) %></p>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<div class="mt-6">
+  <%= render "shared/pagination", pagy: @pagy %>
+</div>
