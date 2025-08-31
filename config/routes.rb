@@ -14,5 +14,6 @@ Rails.application.routes.draw do
      root "articles#index"
 
     resources :articles
+    resources :authors, only: [ :index, :show ]
   end
 end

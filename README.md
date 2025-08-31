@@ -25,7 +25,8 @@ Things you may want to cover:
 
 
 *****
-## 25/Aug/2025
+## Days task
+### 25/Aug/2025
 * Create artical model to represet artical data. [:Done]
     * Artical fields: (title, image, excerpt, author, category, publish-date) [:Done]
     * Migrte to SQLlit database. [:Done]
@@ -36,20 +37,33 @@ Things you may want to cover:
 * Add pagination to the articals page. [:Done]
 * Add internationalization support [:Done]
 
-## 27/Aug/2025
+### 27/Aug/2025
 * Search in Articals page using meilisearch [:Done]
 * Add RTL. [:Done]
 
-## 28/Aug/2025
+### 28/Aug/2025
 * Build Artical body page [:Done]
 * Pause to understand everthing that is exist util this point.
 * Review and define list of task to be completed before adding actual data.
     * List of tasks:
         * Arabic as default language. [:Done]
-        * "All articals" to. "Articals" same for Arabic.
-        * Search bar localization (place holder, and search botton).
-        * Search highlight to be in color in "em"
-        * Also some of the items in the ToDo list.
+        * "All articals" to. "Articals" same for Arabic.  [:Done]
+        * Search bar localization (place holder, and search botton). [:Done]
+        * Search highlight to be in color in "em" [:Done]
+        * Also some of the items in the ToDo list. [:Done]
+
+### 30/Aug/2025
+* Author page.
+
+### 30/Aug/2025
+* Build the prompt file [:Done]
+* http://127.0.0.1:3000/ defualt is english, should be Arabic [:Done]
+* Author page.
+    * App name get changed to author name, it shouldn't [:Done]
+    * Author page should have better listing for the articals. [:Next]
+* Categories page.
+* Default still not english
+
 
 
 ## ToDo (Item - [Priorty 1-10])
@@ -62,6 +76,10 @@ Things you may want to cover:
 * Refactor Search bar to be reusable, partial.
 * [Put a plan for two weeks and review it with Ali] - [10]
 * Handle 404 routes.
+* Infinite scroll.
+* Categories page.
+* Filters.
+* Add actual articals data.
 
 
 ## Ideas:
@@ -71,4 +89,3 @@ Things you may want to cover:
 * قسم الاسره
 * فسم المشاهير الداعمين
 * جنود الاحتلال
-
