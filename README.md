@@ -60,7 +60,8 @@ Things you may want to cover:
 * http://127.0.0.1:3000/ defualt is english, should be Arabic [:Done]
 * Author page.
     * App name get changed to author name, it shouldn't [:Done]
-    * Author page should have better listing for the articals. [:Next]
+    * Author page should have better listing for the articals. [:Done]
+    * Search bar
 * Categories page.
 * Default still not english
 
