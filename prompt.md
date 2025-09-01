@@ -2,27 +2,15 @@
 
 ## Overview
 **Bisan** is a Ruby on Rails–based content aggregation platform.  
-It provides a centralized place to collect, manage, and display articles from various sources.  
+It provides a centralized place to collect, manage, and display content from various sources.  
 
 ### Purpose
-- To enable browsing of articles from multiple external websites while storing them in a unified local database.
+- To enable browsing of content from multiple external websites in one place.
 - To serve as a foundation for further experimentation (e.g., search, AI integrations, recommendations).
 
-### Motivation
-The project originated from the need for a **personalized, language-aware content hub** that can manage articles from multiple sources without depending on third-party CMSs.
-Bisan solves the problem of fragmented article access by:
-- Normalizing data from different article providers.
-- Storing articles in a consistent schema.
-- Rendering them in a unified interface with search and filtering support.
-
----
-
-## Problem Statement
-- Articles are scattered across different sources and formats.  
-
 **Bisan** provides:
-- A simple article model   
-- Extensible design for adding features such as search, categorization.
+* Centrilized place that have all the Articals that talks about Palestine.
+* Search engine that enables users to search on top of everything avialble in the website (Articals, books, videos trascripts)
 
 ---
 ## Project Structuer
@@ -47,6 +35,7 @@ Bisan solves the problem of fragmented article access by:
 │   ├── controllers
 │   │   ├── application_controller.rb
 │   │   ├── articles_controller.rb
+│   │   ├── authors_controller.rb
 │   │   └── concerns
 │   │       └── internationalization.rb
 │   ├── helpers
@@ -65,9 +54,14 @@ Bisan solves the problem of fragmented article access by:
 │   ├── models
 │   │   ├── application_record.rb
 │   │   ├── article.rb
+│   │   ├── author.rb
 │   │   └── concerns
 │   └── views
 │       ├── articles
+│       │   ├── _card.html.erb
+│       │   ├── index.html.erb
+│       │   └── show.html.erb
+│       ├── author
 │       │   ├── _card.html.erb
 │       │   ├── index.html.erb
 │       │   └── show.html.erb
@@ -182,20 +176,34 @@ Bisan solves the problem of fragmented article access by:
 └── vendor
 ```
 
-## Models
-* Articles
+### Schema
 ```
+ActiveRecord::Schema[8.0].define(version: 2025_08_31_105125) do
+  create_table "articles", force: :cascade do |t|
     t.string "title"
     t.string "article_image"
     t.text "excerpt"
-    t.string "author"
     t.string "category"
     t.date "publish_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "body"
     t.string "source_url"
-    t.string "author_image"
     t.string "tags"
+    t.integer "author_id", null: false
+    t.index ["author_id"], name: "index_articles_on_author_id"
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "bio"
+    t.string "avatar_url"
+    t.json "social_links", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "articles", "authors"
+end
 ```
 

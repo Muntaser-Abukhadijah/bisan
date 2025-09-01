@@ -26,7 +26,22 @@
   <!-- Header -->
   <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b">
     <div class="container mx-auto px-5 h-16 flex items-center justify-between">
-    <%= link_to t('app_name'), root_path, class: "text-lg font-semibold" %>
+      <%= link_to root_path do %>
+        <%= image_tag("/Bisan_2.png", alt: t('app_name'), class: "h-60 w-auto") %>
+      <% end %>
+
+
+      <!-- Main nav (centered) -->
+      <nav>
+        <ul class="flex items-center gap-6 text-base font-medium text-gray-800">
+          <!-- Articles tab -->
+          <li>
+            <%= link_to t("nav.articles", default: "المقالات"),
+                        articles_path,
+                        class: "hover:text-black transition #{current_page?(articles_path) ? 'text-black' : 'text-gray-700'}" %>
+          </li>
+        </ul>
+      </nav>
 
       <!-- Locale switcher -->
       <nav aria-label="Language">
