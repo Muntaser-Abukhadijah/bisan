@@ -57,12 +57,19 @@
   </div>
 </div>
 
-<%# --- Body (sanitized) --- %>
+<%# --- Body (formatted from plain text, but still sanitized) --- %>
+<% body_html = sanitize(
+      @article.body.to_s,
+      tags: %w[p br a strong em ul ol li h2 h3 h4 blockquote img code pre figure figcaption table thead tbody tr th td],
+      attributes: %w[href src alt title class]
+    ) %>
+
 <article class="prose prose-neutral max-w-none">
-  <%= sanitize(
-        @article.body.to_s,
-        tags: %w[p br a strong em ul ol li h2 h3 h4 blockquote img code pre figure figcaption table thead tbody tr th td],
-        attributes: %w[href src alt title class]
+  <%= simple_format(
+        auto_link(body_html, html: { target: "_blank", rel: "noopener noreferrer" }),
+        {},                     # no extra HTML options
+        sanitize: false,        # we already sanitized above
+        wrapper_tag: "p"        # wrap paragraphs in <p> tags
       ) %>
 </article>
 

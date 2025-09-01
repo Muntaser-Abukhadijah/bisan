@@ -62,10 +62,15 @@ Things you may want to cover:
     * App name get changed to author name, it shouldn't [:Done]
     * Author page should have better listing for the articals. [:Done]
     * Search bar
-* Understand how things works toghter [:next]
-* Update the prompt file
-* Categories page.
-* Default still not english
+* Understand how things works toghter [:Done]
+* Default still not english [:done]
+
+### 01/Sep/2025
+* Update the prompt file [:Done]
+* Seed actual data [:Done]
+* Logo [:Done]
+* Nav-bar/header [:Done]
+* Categories page. [:next]
 
 
 
@@ -83,6 +88,8 @@ Things you may want to cover:
 * Categories page.
 * Filters.
 * Add actual articals data.
+* Nav-bar/header
+
 
 
 ## Ideas:
