@@ -62,6 +62,8 @@ Things you may want to cover:
     * App name get changed to author name, it shouldn't [:Done]
     * Author page should have better listing for the articals. [:Done]
     * Search bar
+* Understand how things works toghter [:next]
+* Update the prompt file
 * Categories page.
 * Default still not english
 
