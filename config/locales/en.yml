@@ -11,6 +11,10 @@ en:
   authors:
     index:
       title: "Authors"
+      search_placeholder: "Search authors…"
+      search: "Search"
+      clear: "Clear"
+
     view_profile: "View author"
     article_count:
       one: "%{count} article"

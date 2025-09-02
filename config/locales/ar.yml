@@ -10,7 +10,11 @@ ar:
 
   authors:
     index:
-      title: "الكتّاب"
+      title: "الكُتّاب"
+      search_placeholder: "أبحث في الكُتّاب..."
+      search: "أبحث"
+      clear: "مسح"
+
     view_profile: "صفحة الكاتب"
     article_count:
       zero: "لا مقالات"
