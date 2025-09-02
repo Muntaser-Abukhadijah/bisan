@@ -38,9 +38,16 @@
         <ul class="flex items-center gap-6 text-base font-medium text-gray-800">
           <!-- Articles tab -->
           <li>
-            <%= link_to t("nav.articles", default: "المقالات"),
+            <%= link_to t("nav_articles", default: "المقالات"),
                         articles_path,
                         class: "hover:text-black transition #{current_page?(articles_path) ? 'text-black' : 'text-gray-700'}" %>
+          </li>
+
+          <!-- Authors tab -->
+          <li>
+            <%= link_to t("nav_authors", default: "الكُتّاب"),
+                        authors_path,
+                        class: "hover:text-black transition #{current_page?(authors_path) ? 'text-black' : 'text-gray-700'}" %>
           </li>
         </ul>
       </nav>

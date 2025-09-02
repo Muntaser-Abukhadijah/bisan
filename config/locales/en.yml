@@ -26,3 +26,6 @@ en:
   locales:
     en: "English"
     ar: "العربية"
+
+  nav_articles: "Articals"
+  nav_authors: "Authors"
