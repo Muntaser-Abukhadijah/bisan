@@ -2,11 +2,40 @@
 
 <h1 class="text-2xl font-bold mb-4"><%= t("authors.index.title", default: "Authors") %></h1>
 
+<!-- Search form -->
+<%= form_with url: authors_path, method: :get, local: true, role: "search", class: "mb-6" do %>
+  <div class="flex gap-2">
+    <input
+      type="search"
+      name="q"
+      value="<%= params[:q] %>"
+      dir=<%= page_dir %>
+      lang="<%= I18n.locale %>"
+      placeholder="<%= t('.search_placeholder', default: 'Search authors…') %>"
+      class="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:border-gray-500 focus:outline-none text-start"
+    />
+    <button
+      type="submit"
+      class="rounded-md bg-gray-900 px-4 py-2 text-white hover:bg-gray-800"
+    >
+      <%= t('.search', default: 'Search') %>
+    </button>
+    <% if params[:q].present? %>
+      <a
+        href="<%= authors_path %>"
+        class="rounded-md border border-gray-300 px-4 py-2 hover:bg-gray-50"
+      >
+        <%= t('.clear', default: 'Clear') %>
+      </a>
+    <% end %>
+  </div>
+<% end %>
+
 <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-  <%# If you add a counter cache later, pass it as `count: author.articles_count` %>
   <% @authors
      .each do |author| %>
-    <%= render "authors/card", author: author %>
+    <% formatted = (author.respond_to?(:formatted) ? author.formatted : nil) %>
+    <%= render "authors/card", author: author, formatted: formatted %>
   <% end %>
 </ul>
 

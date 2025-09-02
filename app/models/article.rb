@@ -3,7 +3,7 @@ class Article < ApplicationRecord
   include Meilisearch::Rails
   extend Pagy::Meilisearch
 
-  belongs_to :author, optional: false
+  belongs_to :author, counter_cache: true, optional: false
 
   meilisearch do
     # what gets sent with each document

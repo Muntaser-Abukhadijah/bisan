@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_01_110628) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_02_101345) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.string "article_image"
@@ -34,6 +34,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_01_110628) do
     t.json "social_links", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "articles_count", default: 0, null: false
+    t.index ["articles_count"], name: "index_authors_on_articles_count"
   end
 
   add_foreign_key "articles", "authors"
