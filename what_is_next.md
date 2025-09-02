@@ -1,30 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-*****
 ## Days task
 ### 25/Aug/2025
 * Create artical model to represet artical data. [:Done]
@@ -74,6 +47,12 @@ Things you may want to cover:
 ### 02/Sep/2025
 * Use search bar in authros pages. [:Done]
 
+## Ordered list to pick from
+1. Fix the extra pagaination [1]
+2. Logo in Arabic. [1]
+3. Scrapper solution - Design and requirement doc [1]
+4. Scrapper solution - Scrapping metras [1]
+
 
 
 ## ToDo (Item - [Priorty 1-4])
@@ -92,10 +71,7 @@ Things you may want to cover:
 * Home Page [2]
 * Fix the extra pagaination [1]
 * Scrapper solution [1]
-
-
-
-
+* Define how data should be added from the scrapper to Bisan [1]
 
 
 ## Ideas:
