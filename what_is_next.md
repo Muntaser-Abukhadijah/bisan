@@ -47,9 +47,12 @@
 ### 02/Sep/2025
 * Use search bar in authros pages. [:Done]
 
+### 03/Sep/2025
+* Logo in Arabic. [:done]
+
+
+
 ## Ordered list to pick from
-1. Fix the extra pagaination [1]
-2. Logo in Arabic. [1]
 3. Scrapper solution - Design and requirement doc [1]
 4. Scrapper solution - Scrapping metras [1]
 
@@ -72,6 +75,7 @@
 * Fix the extra pagaination [1]
 * Scrapper solution [1]
 * Define how data should be added from the scrapper to Bisan [1]
+* To have better Logs [2]
 
 
 ## Ideas:
