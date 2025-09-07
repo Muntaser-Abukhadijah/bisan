@@ -1,0 +1,13 @@
+{
+  "source": "metras",
+  "file": "/Users/mabukhad/Documents/pls_workspace/our-data-export/metras/parsed.ndjson",
+  "started_at": "2025-09-07 12:17:35 UTC",
+  "finished_at": "2025-09-07 12:17:35 UTC",
+  "duration_s": 0.498,
+  "totals": {
+    "lines": 5,
+    "valid": 5,
+    "inserted": 5
+  },
+  "errors": []
+}

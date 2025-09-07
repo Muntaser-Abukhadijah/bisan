@@ -4,6 +4,8 @@ class Author < ApplicationRecord
   extend Pagy::Meilisearch
   has_many :articles, dependent: :restrict_with_error
 
+  validates :name, presence: true, length: { maximum: 255 }
+
   meilisearch do
     # Send these fields to the index
     attribute :name, :bio, :social_links, :created_at, :updated_at

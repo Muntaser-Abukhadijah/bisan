@@ -3,6 +3,15 @@ class Article < ApplicationRecord
   include Meilisearch::Rails
   extend Pagy::Meilisearch
 
+  # Keep validations pragmatic: allow legacy rows without source_url,
+  # but enforce uniqueness when present (mirrors the partial index).
+  validates :source_url, uniqueness: true, allow_nil: true
+
+  # Basic sanity; tune as you like
+  validates :title, length: { maximum: 500 }, allow_nil: true
+  validates :category, length: { maximum: 200 }, allow_nil: true
+
+
   belongs_to :author, counter_cache: true, optional: false
 
   meilisearch do
@@ -28,5 +37,12 @@ class Article < ApplicationRecord
   # ---- helpers sent to the index ----
   def author_name
     author&.name
+  end
+
+  # Optional: tiny helper the importer will call before save
+  def set_ingestion_fields!(source_id:, content_hash:)
+    self.source_id   = source_id
+    self.ingested_at = Time.current
+    self.content_hash = content_hash
   end
 end
