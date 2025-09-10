@@ -1,86 +1,91 @@
-<%# --- Title --- %>
-<h1 class="text-3xl font-bold tracking-tight mb-3 text-center">
-  <%= @article.title %>
-</h1>
+<main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <%# --- Title --- %>
+  <header class="mb-8 text-center">
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+      <%= @article.title %>
+    </h1>
 
-<%# --- Meta row: source link • publish date • category --- %>
-<div class="flex flex-wrap justify-center items-center gap-3 text-sm text-gray-500 mb-6">
-  <% if @article.source_url.present? %>
-    <%= link_to t("articles.source", default: "Source"),
-                @article.source_url,
-                target: "_blank", rel: "noopener noreferrer",
-                class: "underline hover:no-underline" %>
-    <span aria-hidden="true">•</span>
-  <% end %>
+    <%# --- Meta row: source link • publish date • category --- %>
+    <div class="mt-4 flex flex-wrap justify-center items-center gap-3 text-sm text-gray-500">
+      <% if @article.source_url.present? %>
+        <%= link_to t(".source", default: "Source"),
+                    @article.source_url,
+                    target: "_blank", rel: "noopener noreferrer",
+                    class: "underline hover:no-underline" %>
+        <span aria-hidden="true">•</span>
+      <% end %>
 
-  <% if @article.publish_date.present? %>
-    <time datetime="<%= @article.publish_date %>">
-      <%= l(@article.publish_date, format: :long) rescue @article.publish_date %>
-    </time>
-    <% if @article.category.present? %>
-      <span aria-hidden="true">•</span>
-    <% end %>
-  <% end %>
+      <% if @article.publish_date.present? %>
+        <time datetime="<%= @article.publish_date %>">
+          <%= l(@article.publish_date, format: :long) rescue @article.publish_date %>
+        </time>
+        <% if @article.category.present? %>
+          <span aria-hidden="true">•</span>
+        <% end %>
+      <% end %>
 
-  <% if @article.category.present? %>
-    <%= link_to @article.category,
-                articles_path(locale: I18n.locale, category: @article.category),
-                class: "inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium hover:bg-gray-200" %>
-  <% end %>
-</div>
-
-<%# --- Cover image --- %>
-<% if @article.article_image.present? %>
-  <div class="mb-6 mx-auto max-w-2xl overflow-hidden rounded-2xl shadow">
-    <%= image_tag @article.article_image,
-                  alt: @article.title,
-                  class: "w-full h-auto object-cover" %>
-  </div>
-<% end %>
-
-<%# --- Author block (uses association) --- %>
-<% a = @article.author %>
-<div class="flex items-center gap-3 mb-8">
-  <% if a&.avatar_url.present? %>
-    <%= image_tag a.avatar_url, alt: a.name, class: "h-10 w-10 rounded-full object-cover" %>
-  <% else %>
-    <div class="h-10 w-10 rounded-full bg-gray-200"></div>
-  <% end %>
-  <div class="text-sm">
-    <div class="font-medium text-gray-900">
-      <% if a %>
-        <%= link_to a.name, author_path(I18n.locale, a), class: "hover:underline" %>
-      <% else %>
-        <%= t("articles.unknown_author", default: "Unknown author") %>
+      <% if @article.category.present? %>
+        <%= link_to @article.category,
+                    articles_path(locale: I18n.locale, category: @article.category),
+                    class: "inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700 hover:bg-gray-200" %>
       <% end %>
     </div>
-  </div>
-</div>
+  </header>
 
-<%# --- Body (formatted from plain text, but still sanitized) --- %>
-<% body_html = sanitize(
-      @article.body.to_s,
-      tags: %w[p br a strong em ul ol li h2 h3 h4 blockquote img code pre figure figcaption table thead tbody tr th td],
-      attributes: %w[href src alt title class]
-    ) %>
+  <%# --- Cover image --- %>
+  <% if @article.article_image.present? %>
+    <div class="mb-8 mx-auto max-w-3xl overflow-hidden rounded-2xl shadow">
+      <%= image_tag @article.article_image,
+                    alt: @article.title,
+                    class: "w-full h-auto object-cover" %>
+    </div>
+  <% end %>
 
-<article class="prose prose-neutral max-w-none">
-  <%= simple_format(
-        auto_link(body_html, html: { target: "_blank", rel: "noopener noreferrer" }),
-        {},                     # no extra HTML options
-        sanitize: false,        # we already sanitized above
-        wrapper_tag: "p"        # wrap paragraphs in <p> tags
-      ) %>
+  <%# --- Author block --- %>
+  <% if (a = @article.author) %>
+    <div class="flex items-center gap-4 mb-12">
+      <% if a.avatar_url.present? %>
+        <%= image_tag a.avatar_url,
+                      alt: a.name,
+                      class: "h-12 w-12 rounded-full object-cover" %>
+      <% else %>
+        <div class="h-12 w-12 rounded-full bg-gray-200"></div>
+      <% end %>
+      <div class="text-sm">
+        <p class="font-medium text-gray-900">
+          <%= link_to a.name, author_path(I18n.locale, a), class: "hover:underline" %>
+        </p>
+        <% if a.bio.present? %>
+          <p class="text-gray-500"><%= truncate(a.bio, length: 80) %></p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%# --- Body --- %>
+  <article
+  class="prose prose-neutral lg:prose-lg max-w-none
+         prose-p:mb-6           <!-- extra blank after each paragraph -->
+         prose-img:rounded-xl prose-img:shadow
+         prose-headings:scroll-mt-20 prose-figure:my-8 prose-figcaption:text-gray-500"
+  dir="<%= I18n.locale.to_s.start_with?('ar') ? 'rtl' : 'ltr' %>">
+  <%= render_article_body(@article.body) %>
 </article>
 
-<%# --- Tags (string column; split on commas) --- %>
-<% tags = @article.respond_to?(:tag_list) ? @article.tag_list : (@article.tags.to_s.split(",").map(&:strip).reject(&:blank?)) %>
-<% if tags.any? %>
-  <div class="mt-10 flex flex-wrap gap-2">
-    <% tags.each do |tag| %>
-      <%= link_to "##{tag}",
-                  articles_path(locale: I18n.locale, tag: tag),
-                  class: "inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium hover:bg-gray-200" %>
-    <% end %>
-  </div>
-<% end %>
+
+
+  <%# --- Tags --- %>
+  <% tags = @article.respond_to?(:tag_list) ? @article.tag_list : (@article.tags.to_s.split(",").map(&:strip).reject(&:blank?)) %>
+  <% if tags.any? %>
+    <footer class="mt-12 border-t border-gray-200 pt-6">
+      <h2 class="sr-only">Tags</h2>
+      <div class="flex flex-wrap gap-2">
+        <% tags.each do |tag| %>
+          <%= link_to "##{tag}",
+                      articles_path(locale: I18n.locale, tag: tag),
+                      class: "inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 hover:bg-gray-200" %>
+        <% end %>
+      </div>
+    </footer>
+  <% end %>
+</main>

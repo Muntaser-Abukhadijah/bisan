@@ -7,6 +7,8 @@ en:
       search_placeholder: "Search articles…"
     card:
       by: "by"
+    show:
+      source: Soruce
   
   authors:
     index:
