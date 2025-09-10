@@ -1,0 +1,39 @@
+{
+  "source": "metras",
+  "file": "/Users/mabukhad/Documents/pls_workspace/our-data-export/metras/parsed.ndjson",
+  "started_at": "2025-09-07 11:21:13 UTC",
+  "finished_at": "2025-09-07 11:21:14 UTC",
+  "duration_s": 0.141,
+  "totals": {
+    "lines": 5,
+    "valid": 5,
+    "errors": 5
+  },
+  "errors": [
+    {
+      "line": 1,
+      "code": "upsert_error",
+      "message": "فشل التحقّق من: محتوى Name أطول من اللّازم (الحد الأقصى هو 255 حرف)"
+    },
+    {
+      "line": 2,
+      "code": "upsert_error",
+      "message": "فشل التحقّق من: محتوى Name أطول من اللّازم (الحد الأقصى هو 255 حرف)"
+    },
+    {
+      "line": 3,
+      "code": "upsert_error",
+      "message": "فشل التحقّق من: محتوى Name أطول من اللّازم (الحد الأقصى هو 255 حرف)"
+    },
+    {
+      "line": 4,
+      "code": "upsert_error",
+      "message": "فشل التحقّق من: محتوى Name أطول من اللّازم (الحد الأقصى هو 255 حرف)"
+    },
+    {
+      "line": 5,
+      "code": "upsert_error",
+      "message": "فشل التحقّق من: محتوى Name أطول من اللّازم (الحد الأقصى هو 255 حرف)"
+    }
+  ]
+}

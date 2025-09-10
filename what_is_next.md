@@ -1,4 +1,9 @@
 ## Days task
+
+### 10/Sep/2025
+1. Read the 50 articles from Metras.
+2. Check if anything in Article page needs update.
+
 ### 25/Aug/2025
 * Create artical model to represet artical data. [:Done]
     * Artical fields: (title, image, excerpt, author, category, publish-date) [:Done]
@@ -54,8 +59,9 @@
 
 ## Ordered list to pick from
 3. Scrapper solution - Design and requirement doc [1]
-4. Scrapper solution - Scrapping metras [1]
-
+    3.1 Learn about scrapping using "Scrapfly Web Scraping Academy"
+    3.2 Requirement doc and High level design
+4. Scrapper solution - Scrapping metras as first step [1]
 
 
 ## ToDo (Item - [Priorty 1-4])
