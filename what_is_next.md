@@ -1,8 +1,16 @@
 ## Days task
 
+### 11/Sep/2025 [Planed]
+1. Import all Metras data in a way that you don't need to remove eveything in database or meilisearch index.
+1. Improve the articles card in order for the image to have standard size.
+2. Fix the number of articles that show in one page.
+
+
 ### 10/Sep/2025
-1. Read the 50 articles from Metras.
-2. Check if anything in Article page needs update.
+1. Read the 50 articles from Metras. [:Done]
+2. Check if anything in Article page needs update. [:Done]
+3. Consider HTML tags in the rendering. [:Done]
+4. Why there are dublicate Images in the rendered page? [:Done]
 
 ### 25/Aug/2025
 * Create artical model to represet artical data. [:Done]
@@ -82,6 +90,7 @@
 * Scrapper solution [1]
 * Define how data should be added from the scrapper to Bisan [1]
 * To have better Logs [2]
+* Standarize the size of the images in Articles page.
 
 
 ## Ideas:
