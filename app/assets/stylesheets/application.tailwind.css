@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 .prose p {
   margin-bottom: 1.5rem; /* same effect as prose-p:mb-6 */
 }
@@ -14,4 +15,5 @@
   color: #6b7280;       /* Tailwind gray-500 */
   text-align: center;   /* center under the image */
   font-style: italic;   /* optional: captions usually italic */
+  margin-bottom: 1rem;
 }

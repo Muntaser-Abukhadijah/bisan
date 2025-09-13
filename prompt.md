@@ -1,19 +1,49 @@
 # Bisan Project Documentation
 
 ## Overview
-**Bisan** is a Ruby on Rails–based content aggregation platform.  
-It provides a centralized place to collect, manage, and display content from various sources.  
+**Bisan** is a Ruby on Rails–based content platform focused on Palestinian content.  
+It provides a centralized place to collect, manage, and display articles about Palestine.
 
 ### Purpose
-- To enable browsing of content from multiple external websites in one place.
-- To serve as a foundation for further experimentation (e.g., search, AI integrations, recommendations).
+- Centralized platform for articles about Palestine
+- Multi-language support (Arabic as default, English)
+- Search functionality using Meilisearch
+- Author profiles and article management
 
-**Bisan** provides:
-* Centrilized place that have all the Articals that talks about Palestine.
-* Search engine that enables users to search on top of everything avialble in the website (Articals, books, videos trascripts)
+**Key Features:**
+* Article browsing with pagination
+* Full-text search with highlighting
+* Internationalization (Arabic/English) with RTL support
+* Author pages with article listings
+* Responsive design with Tailwind CSS
+* Search functionality across articles and authors
 
 ---
-## Project Structuer
+
+## Technology Stack
+- **Backend:** Ruby on Rails 8.0
+- **Database:** SQLite
+- **Search:** Meilisearch
+- **Frontend:** Tailwind CSS, Stimulus
+- **Internationalization:** Rails I18n (Arabic/English)
+- **Pagination:** Pagy gem
+
+## Current Features
+- ✅ Article model with full CRUD
+- ✅ Author model with profiles
+- ✅ Article listing with pagination
+- ✅ Full-text search with Meilisearch
+- ✅ Internationalization (Arabic default, English)
+- ✅ RTL support for Arabic
+- ✅ Article detail pages
+- ✅ Author pages with article listings
+- ✅ Search highlighting
+- ✅ Responsive design
+- ✅ Logo and navigation
+- ✅ Seeded with actual data
+
+---
+## Project Structure
 ```
 .
 ├── Dockerfile
@@ -176,8 +206,27 @@ It provides a centralized place to collect, manage, and display content from var
 └── vendor
 ```
 
-### Schema
-```
+## Models
+
+### Article
+- **Fields:** title, article_image, excerpt, body, category, tags, source_url, publish_date
+- **Associations:** belongs_to :author
+- **Search:** Indexed with Meilisearch for full-text search
+
+### Author
+- **Fields:** name, bio, avatar_url, social_links (JSON)
+- **Associations:** has_many :articles
+- **Features:** Profile pages with article listings
+
+## Routes
+- `/` - Articles index (Arabic default)
+- `/articles` - Articles listing with search and pagination
+- `/articles/:id` - Article detail page
+- `/authors/:id` - Author profile with articles
+- Language switching via locale parameter
+
+## Database Schema
+```ruby
 ActiveRecord::Schema[8.0].define(version: 2025_08_31_105125) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -206,4 +255,3 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_31_105125) do
   add_foreign_key "articles", "authors"
 end
 ```
-
