@@ -1,6 +1,10 @@
 ## Days task
 
-### 11/Sep/2025 [Planed]
+
+### 27/Sep/2025 [Planed]
+1. Update Bisan to be able to get any new data from Hasad without beaking existing data 
+
+### 11/Sep/2025
 1. Import all Metras data in a way that you don't need to remove eveything in database or meilisearch index.
 1. Improve the articles card in order for the image to have standard size.
 2. Fix the number of articles that show in one page.

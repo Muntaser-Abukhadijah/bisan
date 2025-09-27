@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_07_111419) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_27_095153) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.string "article_image"
@@ -29,7 +29,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_07_111419) do
     t.index ["author_id"], name: "index_articles_on_author_id"
     t.index ["content_hash"], name: "index_articles_on_content_hash"
     t.index ["source_id"], name: "index_articles_on_source_id"
-    t.index ["source_url"], name: "idx_articles_source_url_unique", unique: true, where: "source_url IS NOT NULL"
     t.index ["source_url"], name: "index_articles_on_source_url", unique: true
   end
 
@@ -42,6 +41,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_07_111419) do
     t.datetime "updated_at", null: false
     t.integer "articles_count", default: 0, null: false
     t.index ["articles_count"], name: "index_authors_on_articles_count"
+    t.index ["name"], name: "index_authors_on_name", unique: true
   end
 
   add_foreign_key "articles", "authors"
