@@ -2,7 +2,9 @@
 
 
 ### 27/Sep/2025 [Planed]
-1. Update Bisan to be able to get any new data from Hasad without beaking existing data 
+1. Update Bisan to be able to get any new data from Hasad without beaking existing data [:Done]
+2. Refactoring and bug fixes [:inprogrss]
+
 
 ### 11/Sep/2025
 1. Import all Metras data in a way that you don't need to remove eveything in database or meilisearch index.
@@ -95,7 +97,12 @@
 * Define how data should be added from the scrapper to Bisan [1]
 * To have better Logs [2]
 * Standarize the size of the images in Articles page.
+* Search highlight to be yellow instead of em
 
+
+## Bugs:
+* When you go to wrong path, you don't get redirected to 404.
+* Create excerpt for articles that does not have excerpt
 
 ## Ideas:
 * Collect comdy shows about palestine.

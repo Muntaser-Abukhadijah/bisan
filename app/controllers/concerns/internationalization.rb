@@ -1,4 +1,3 @@
-# controllers/concerns/internationalization.rb
 module Internationalization
   extend ActiveSupport::Concern
 
@@ -8,7 +7,7 @@ module Internationalization
     private
 
     def switch_locale(&action)
-      locale = locale_from_url || I18n.default_locale || locale_from_headers
+      locale = locale_from_url || I18n.default_locale
       response.set_header "Content-Language", locale
       I18n.with_locale(locale, &action)
     end

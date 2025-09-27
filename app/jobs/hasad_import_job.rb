@@ -66,6 +66,15 @@ class HasadImportJob < ApplicationJob
     authors_inserted  += upsert_authors!(author_buffer)  if author_buffer.any?
     articles_inserted += insert_articles!(article_buffer) if article_buffer.any?
 
+    ActiveRecord::Base.connection.execute <<~SQL
+      UPDATE authors
+      SET articles_count = (
+        SELECT COUNT(*)
+        FROM articles
+        WHERE articles.author_id = authors.id
+      );#{' '}
+    SQL
+
     puts "[HasadImport] DONE authors_inserted≈#{authors_inserted} articles_inserted≈#{articles_inserted}"
   end
 

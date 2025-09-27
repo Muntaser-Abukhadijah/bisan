@@ -3,14 +3,8 @@ class ArticlesController < ApplicationController
 
   def index
     @q = params[:q].to_s.strip
-
-    hits = if @q.present?
-      Article.pagy_search(@q, hits_per_page: 12, sort: [ "created_at:desc" ])
-    else
-      # show everything when no query; "*" means match all
-      Article.pagy_search("*", hits_per_page: 12, sort: [ "created_at:desc" ])
-    end
-
+    query = @q.presence || ""
+    hits  = Article.pagy_search(query)
     @pagy, @articles = pagy_meilisearch(hits)
   end
 
