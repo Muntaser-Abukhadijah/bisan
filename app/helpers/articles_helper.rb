@@ -1,85 +1,127 @@
 # frozen_string_literal: true
 
 module ArticlesHelper
-  # Render stored HTML safely with sensible defaults for headings, images, tables, etc.
-  #
-  # - Keeps authoring HTML (h1..h4, figure/figcaption, img width/height)
-  # - Adds target/_blank & rel to external links
-  # - Makes images responsive (max-width:100%; height:auto)
-  # - Preserves width/height attributes if provided by the source
-  # - De-duplicates identical <img> tags within the same <figure> (and consecutive duplicates globally)
-  #
   def render_article_body(html)
     raw_html = html.to_s
 
-    # 1) Sanitize with a relaxed, extended allowlist
+    # ---------- 0) PRE-PROCESS ----------
+    doc0 = Nokogiri::HTML::DocumentFragment.parse(raw_html)
+
+    # Remove <noscript> entirely (WP/Jetpack duplicates live here)
+    doc0.css("noscript").remove
+
+    # Kill explicit lazy fallbacks if present
+    doc0.css("img[data-lazy-fallback]").each(&:remove)
+
+    # Promote lazy attrs and clean up placeholder srcset
+    doc0.css("img").each do |img|
+      if (lazy = img["data-lazy-src"] || img["data-src"]).present?
+        img["src"] = lazy
+        img.remove_attribute("data-lazy-src")
+        img.remove_attribute("data-src")
+      end
+      if (lazyset = img["data-lazy-srcset"] || img["data-srcset"]).present?
+        img["srcset"] = lazyset
+        img.remove_attribute("data-lazy-srcset")
+        img.remove_attribute("data-srcset")
+      end
+      img.remove_attribute("srcset") if img["srcset"]&.start_with?("data:")
+
+      # If src missing but srcset exists, take first candidate
+      if img["src"].to_s.strip.empty? && img["srcset"].present?
+        first = img["srcset"].split(",").first.to_s.strip.split(/\s+/).first
+        img["src"] = first if first.present?
+      end
+
+      # Strip query/fragment from src to avoid dupes like ?is-pending-load=1
+      if (src = img["src"]).present?
+        begin
+          u = URI.parse(src)
+          u.query = u.fragment = nil
+          img["src"] = u.to_s
+        rescue
+          img["src"] = src.to_s.split("?").first
+        end
+      end
+    end
+
+    prepped_html = doc0.to_html
+
+    # ---------- 1) SANITIZE ----------
     safe = sanitize(
-      raw_html,
+      prepped_html,
       tags: %w[
         p br a strong em b i u span ul ol li h1 h2 h3 h4 blockquote code pre
         figure figcaption img table thead tbody tr th td hr sup sub
       ],
       attributes: %w[
         href src alt title width height class id target rel colspan rowspan
-        srcset sizes
+        srcset sizes referrerpolicy
       ]
     )
 
-    # 2) Post-process with Nokogiri to add UX attributes/classes
+    # ---------- 2) POST-PROCESS ----------
     doc = Nokogiri::HTML::DocumentFragment.parse(safe)
 
-    # External links: open in new tab, add security rel
+    # External links → new tab + rel
     doc.css("a[href]").each do |a|
       href = a["href"].to_s
-      next if href.start_with?("#") || href.start_with?("/") || (respond_to?(:request) && href.start_with?(request.base_url))
-
-      a.set_attribute("target", "_blank")
-      a.set_attribute("rel", "noopener noreferrer")
+      next if href.start_with?("#", "/") || (respond_to?(:request) && href.start_with?(request.base_url))
+      a["target"] = "_blank"
+      a["rel"]    = "noopener noreferrer"
     end
 
-    # Images: responsive, lazy, keep width/height if present
+    # Images: responsive, async, safe referrer
     doc.css("img").each do |img|
-      img.set_attribute("loading", "lazy")
-      img.set_attribute("decoding", "async")
+      img.remove_attribute("srcset") if img["srcset"]&.start_with?("data:")
+      img["loading"]         = "lazy"
+      img["decoding"]        = "async"
+      img["referrerpolicy"] ||= "no-referrer"
       merged = (img["class"].to_s.split + %w[max-w-full h-auto rounded-2xl mx-auto]).uniq.join(" ")
-      img.set_attribute("class", merged)
+      img["class"] = merged
     end
 
-    # *** De-duplicate identical images inside the same figure ***
+    # Helper to normalize URLs for dedupe (drop query/frag, decode %XX, fold www.)
+    normalize_url = ->(url) do
+      return "" if url.blank?
+      begin
+        u = URI.parse(url)
+        host = u.host.to_s.downcase.sub(/\Awww\./, "")
+        path = (CGI.unescape(u.path.to_s) rescue u.path.to_s)
+        "#{u.scheme}://#{host}#{path}"
+      rescue
+        url.to_s.split("?").first
+      end
+    end
+
+    # De-duplicate identical images within the same figure
     doc.css("figure").each do |fig|
       seen = {}
       fig.css("img").each do |img|
-        key = img["src"].to_s.strip
-        if key.empty?
-          # If somehow only data-src exists (not expected post-sanitize), skip dedupe
-          next
-        end
-        if seen[key]
-          img.remove
-        else
-          seen[key] = true
-        end
+        key = normalize_url.call(img["src"])
+        next if key.blank?
+        seen[key] ? img.remove : seen[key] = true
       end
     end
 
-    # *** Optional: remove consecutive duplicate images globally (outside figures) ***
-    prev_src = nil
+    # De-duplicate consecutive images globally
+    prev_key = nil
     doc.css("img").to_a.each do |img|
-      src = img["src"].to_s.strip
-      if src.present? && src == prev_src
+      key = normalize_url.call(img["src"])
+      if key.present? && key == prev_key
         img.remove
       else
-        prev_src = src
+        prev_key = key
       end
     end
 
-    # Headings: add some rhythm
+    # Headings rhythm
     doc.css("h1,h2,h3,h4").each do |h|
       merged = (h["class"].to_s.split + %w[font-bold mt-8 mb-4]).uniq.join(" ")
-      h.set_attribute("class", merged)
+      h["class"] = merged
     end
 
-    # Tables: make them scrollable horizontally on small screens
+    # Tables: wrap for horizontal scroll
     doc.css("table").each do |table|
       wrapper = Nokogiri::XML::Node.new("div", doc)
       wrapper["class"] = "overflow-x-auto my-6"
@@ -88,7 +130,6 @@ module ArticlesHelper
       table["class"] = [ table["class"], "min-w-full border-collapse" ].compact.join(" ")
     end
 
-    # Return HTML safe
     doc.to_html.html_safe
   end
 end

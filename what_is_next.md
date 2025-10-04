@@ -1,7 +1,12 @@
 ## Days task
+### 4/Oct/2025
+* Fix showing the image in article pages. [:Done]
+* Add new data to Bisan
+* Draft a Home Page [:in-progress]
 
 
-### 27/Sep/2025 [Planed]
+
+### 27/Sep/2025
 1. Update Bisan to be able to get any new data from Hasad without beaking existing data [:Done]
 2. Refactoring and bug fixes [:inprogrss]
 
@@ -92,8 +97,6 @@
 * Dark/light mode. [4]
 * Social media for the app [4]
 * Home Page [2]
-* Fix the extra pagaination [1]
-* Scrapper solution [1]
 * Define how data should be added from the scrapper to Bisan [1]
 * To have better Logs [2]
 * Standarize the size of the images in Articles page.
