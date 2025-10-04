@@ -1,4 +1,11 @@
 en:
+  home:
+    index:
+      hero_title: "Bisan - Palestinian Content Platform"
+      hero_subtitle: "A centralized place for all articles about Palestine"
+      browse_articles: "Browse Articles"
+      recent_articles: "Recent Articles"
+
   articles:
     index:
       articles: "Articals"

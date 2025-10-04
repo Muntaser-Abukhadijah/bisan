@@ -1,4 +1,11 @@
 ar:
+  home:
+    index:
+      hero_title: "بيسان - منصة المحتوى الفلسطيني"
+      hero_subtitle: "مكان مركزي لجميع المقالات التي تتحدث عن فلسطين"
+      browse_articles: "تصفح المقالات"
+      recent_articles: "أحدث المقالات"
+
   articles:
     index:
       articles: "المقالات"
