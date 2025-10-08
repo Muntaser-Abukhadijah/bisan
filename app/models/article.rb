@@ -10,5 +10,6 @@ class Article < ApplicationRecord
     attribute :title, :excerpt, :body
     searchable_attributes [ :title, :excerpt, :body ]
     attributes_to_highlight [ "*" ]
+    pagination max_total_hits: 10000
   end
 end

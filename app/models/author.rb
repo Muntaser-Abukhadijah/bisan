@@ -9,5 +9,6 @@ class Author < ApplicationRecord
     attribute :name, :bio
     searchable_attributes [ :name, :bio ]
     attributes_to_highlight [ "*" ]
+    pagination max_total_hits: 10000
   end
 end
