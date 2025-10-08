@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   def index
     @q = params[:q].to_s.strip
     query = @q.presence || ""
-    hits  = Article.pagy_search(query)
+    hits  = Article.pagy_search(query, highlight_pre_tag: "<mark>", highlight_post_tag: "</mark>")
     @pagy, @articles = pagy_meilisearch(hits)
   end
 
