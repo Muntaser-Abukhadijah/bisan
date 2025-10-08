@@ -1,7 +1,9 @@
 ## Days task
+### 8/Oct/2025
+
 ### 4/Oct/2025
 * Fix showing the image in article pages. [:Done]
-* Add new data to Bisan
+* Add new data to Bisan [:Done]
 * Draft a Home Page [:in-progress]
 
 
@@ -96,11 +98,9 @@
 * Icones for nav bar tabs [4]
 * Dark/light mode. [4]
 * Social media for the app [4]
-* Home Page [2]
 * Define how data should be added from the scrapper to Bisan [1]
 * To have better Logs [2]
 * Standarize the size of the images in Articles page.
-* Search highlight to be yellow instead of em
 
 
 ## Bugs:
