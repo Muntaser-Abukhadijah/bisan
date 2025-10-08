@@ -15,10 +15,12 @@
   <div class="p-5">
     <%# Category + date %>
     <div class="mb-2 flex items-center gap-2 text-sm text-gray-500">
-      <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
-        <%= article.category.presence || "Uncategorized" %>
-      </span>
+      <% if article.category.present? %>
+        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
+          <%= article.category %>
+        </span>
       <span aria-hidden="true">·</span>
+      <% end %>
       <time datetime="<%= article.publish_date %>">
         <%= l(article.publish_date, format: :long) rescue article.publish_date %>
       </time>
