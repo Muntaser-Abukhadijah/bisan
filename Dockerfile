@@ -42,27 +42,23 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
     rm -rf /tmp/node-build-master
 RUN corepack enable && yarn set version $YARN_VERSION
 
+# Copy application code first
+COPY . .
+
 # Install application gems
-COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
-# Install node modules
-COPY package.json yarn.lock ./
+# Install node modules (node_modules is in .dockerignore so wasn't copied)
 RUN yarn install --immutable
-
-# Copy application code
-COPY . .
 
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
-
-
-RUN rm -rf node_modules
+# Skip yarn install during precompile since we already installed
+RUN SECRET_KEY_BASE_DUMMY=1 SKIP_YARN_INSTALL=1 ./bin/rails assets:precompile
 
 
 # Final stage for app image

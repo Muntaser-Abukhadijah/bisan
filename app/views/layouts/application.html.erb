@@ -20,8 +20,8 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "/assets/application", "data-turbo-track": "reload", type: "module" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
   <body class="<%= 'rtl' if page_dir == 'rtl' %>">
@@ -29,7 +29,7 @@
   <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b">
     <div class="container mx-auto px-5 h-16 flex items-center justify-between">
       <% logo = I18n.locale.to_s == "ar" ? "/Bisan_ar.png" : "/Bisan_2.png" %>
-      <% logo_class = I18n.locale.to_s == "ar" ? "h-18 w-auto" : "h-15 w-auto" %>
+      <% logo_class = I18n.locale.to_s == "ar" ? "h-16 w-auto" : "h-12 w-auto" %>
       <%= link_to root_path do %>
         <%= image_tag(logo, alt: t("app_name"), class: logo_class) %>
       <% end %>
@@ -79,7 +79,8 @@
                             url_for(locale: locale),
                             class: "inline-flex items-center rounded-full border border-gray-300 px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50 transition",
                             hreflang: locale,
-                            lang: locale %>
+                            lang: locale,
+                            data: { turbo: false } %>
               <% end %>
             </li>
           <% end %>
