@@ -122,6 +122,9 @@ class HasadImportJob < ApplicationJob
     body_html = row["content_html"].presence || row["body"].presence
     content_hash = body_html.present? ? Digest::SHA256.hexdigest(body_html) : nil
 
+    # Generate excerpt from body if missing
+    excerpt = row["excerpt"].presence || generate_excerpt(body_html)
+
     tags_str = case row["tags"]
     when Array  then row["tags"].join(",")
     when String then row["tags"]
@@ -130,7 +133,7 @@ class HasadImportJob < ApplicationJob
     {
       "title"         => row["title"],
       "article_image" => row["article_image_url"].presence || row["article_image"].presence,
-      "excerpt"       => row["excerpt"],
+      "excerpt"       => excerpt,
       "category"      => row["categorie"].presence || row["category"],
       "publish_date"  => publish_date,
       "body"          => body_html,
@@ -169,5 +172,23 @@ class HasadImportJob < ApplicationJob
   def author_missing_in_cache?(name)
     # If cache empty or name not in it, treat as missing
     !(@author_cache && author_id = @author_cache[name])
+  end
+
+  def generate_excerpt(html_content)
+    return nil if html_content.blank?
+    
+    # Strip HTML tags and get plain text
+    plain_text = html_content.gsub(/<[^>]*>/, ' ')
+                             .gsub(/\s+/, ' ')
+                             .strip
+    
+    # Take first 200 characters and truncate at word boundary
+    if plain_text.length <= 200
+      plain_text
+    else
+      truncated = plain_text[0...200]
+      last_space = truncated.rindex(' ')
+      last_space ? truncated[0...last_space] + '...' : truncated + '...'
+    end
   end
 end
