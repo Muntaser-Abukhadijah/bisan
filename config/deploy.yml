@@ -13,9 +13,9 @@ servers:
   #     - 192.168.0.1
   #   cmd: bin/jobs
 
-# SSL enabled using nip.io for automatic DNS resolution
+# Proxy configuration - Caddy will handle SSL on 80/443, Kamal proxy on 8080
 proxy:
-  ssl: true
+  ssl: false
   host: 104.248.18.215.nip.io
 
 # Credentials for your image host.
