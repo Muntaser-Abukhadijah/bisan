@@ -1,0 +1,28 @@
+# Caddy configuration for Bisan on Contabo server with automatic HTTPS
+185.185.82.142.nip.io {
+    reverse_proxy localhost:8080
+    
+    # Let's Encrypt will automatically obtain and renew certificates
+    tls abukhadijah.muntaser@gmail.com
+    
+    # Enable compression
+    encode gzip
+    
+    # Security headers
+    header {
+        # Enable HSTS
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        # Prevent clickjacking
+        X-Frame-Options "SAMEORIGIN"
+        # Prevent MIME sniffing
+        X-Content-Type-Options "nosniff"
+        # Enable XSS protection
+        X-XSS-Protection "1; mode=block"
+    }
+    
+    # Logging
+    log {
+        output file /var/log/caddy/access.log
+        format json
+    }
+}
