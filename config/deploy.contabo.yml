@@ -33,6 +33,7 @@ env:
     # When you start using multiple servers, you should split out job processing to a dedicated machine.
     SOLID_QUEUE_IN_PUMA: true
     MEILISEARCH_HOST: http://bisan-meilisearch:7700
+    HASAD_ROOT: /rails/hasad
 
     # Set number of processes dedicated to Solid Queue (default: 1)
     # JOB_CONCURRENCY: 3
