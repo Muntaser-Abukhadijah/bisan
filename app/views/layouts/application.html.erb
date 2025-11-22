@@ -62,18 +62,18 @@
       <div class="relative md:hidden" data-controller="dropdown">
         <button
           data-action="click->dropdown#toggle"
-          class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+          class="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
           aria-label="<%= t('menu', default: 'Menu') %>"
         >
-          <%= heroicon "squares-2x2", options: { class: "w-5 h-5" }, variant: :outline %>
+          <%= heroicon "squares-2x2", options: { class: "w-4 h-4" }, variant: :outline %>
           <span><%= t("menu", default: "القائمة") %></span>
-          <%= heroicon "chevron-down", options: { class: "w-4 h-4" }, variant: :outline %>
+          <%= heroicon "chevron-down", options: { class: "w-3.5 h-3.5" }, variant: :outline %>
         </button>
 
         <!-- Dropdown Menu -->
         <div
           data-dropdown-target="menu"
-          class="hidden absolute left-0 mt-2 w-48 rounded-lg shadow-lg bg-white border border-gray-200 py-1 z-50"
+          class="hidden absolute left-0 mt-2 w-40 rounded-lg shadow-lg bg-white border border-gray-200 py-1 z-50"
         >
           <%= link_to articles_path,
                       class: "flex items-center gap-3 px-4 py-2 text-sm #{current_page?(articles_path) ? 'bg-gray-50 text-black font-medium' : 'text-gray-700 hover:bg-gray-100'}" do %>
@@ -94,18 +94,18 @@
         <% current_label = t(I18n.locale, scope: "locales", default: I18n.locale.to_s.upcase) %>
         <button
           data-action="click->dropdown#toggle"
-          class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+          class="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
           aria-label="<%= t('select_language', default: 'Select Language') %>"
         >
-          <%= heroicon "language", options: { class: "w-5 h-5" }, variant: :outline %>
+          <%= heroicon "language", options: { class: "w-4 h-4" }, variant: :outline %>
           <span><%= current_label %></span>
-          <%= heroicon "chevron-down", options: { class: "w-4 h-4" }, variant: :outline %>
+          <%= heroicon "chevron-down", options: { class: "w-3.5 h-3.5" }, variant: :outline %>
         </button>
 
         <!-- Dropdown Menu -->
         <div
           data-dropdown-target="menu"
-          class="hidden absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-white border border-gray-200 py-1 z-50"
+          class="hidden absolute right-0 mt-2 w-40 rounded-lg shadow-lg bg-white border border-gray-200 py-1 z-50"
         >
           <% I18n.available_locales.each do |locale| %>
             <% active = I18n.locale == locale %>
