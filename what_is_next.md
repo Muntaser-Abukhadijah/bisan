@@ -101,6 +101,33 @@
 * Define how data should be added from the scrapper to Bisan [1]
 * To have better Logs [2]
 * Standarize the size of the images in Articles page.
+-----------------------------------------------------------
+* List new 18 new soruces to be added. [1]
+    * https://ultrapal.ultrasawt.com/
+    * https://www.alzaytouna.net/
+    * https://www.palestine-studies.org/ar/blogs/all2
+    * https://www.palestineforum.net/category/%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA/
+    * https://www.palestinechronicle.com/gazas-blackwater-despite-denials-us-boots-will-be-on-the-ground-in-gaza/
+    * https://palinfo.com/category/opinion/
+    * https://www.arab48.com/%D9%81%D9%84%D8%B3%D8%B7%D9%8A%D9%86%D9%8A%D8%A7%D8%AA/%D8%AF%D8%B1%D8%A7%D8%B3%D8%A7%D8%AA-%D9%88%D8%AA%D9%82%D8%A7%D8%B1%D9%8A%D8%B1
+    * https://aljarmaq.net/
+    * https://electronicintifada.net/
+    * https://mondoweiss.net/ways-to-give/
+    * https://www.972mag.com/
+    * https://babelwad.com/
+
+* Metrics. [4]
+* Project name and domain name. [4]
+* Unit tests. [6]
+
+
+
+
+
+
+
+
+
 
 
 ## Bugs:
