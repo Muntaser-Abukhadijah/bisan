@@ -16,4 +16,4 @@ production:
   
   hasad_import:
     class: HasadImportJob
-    schedule: every 12 hours
+    schedule: at 3am, 3pm
