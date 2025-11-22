@@ -58,34 +58,41 @@
         </ul>
       </nav>
 
-      <!-- Locale switcher -->
-      <nav aria-label="Language">
-        <ul class="flex items-center gap-2 list-none m-0 p-0">
-          <% I18n.available_locales.each do |locale| %>
-            <li>
-              <% active = I18n.locale == locale %>
-              <% label  = t(locale, scope: "locales", default: locale.to_s.upcase) %>
+      <!-- Locale switcher dropdown -->
+      <div class="relative" data-controller="dropdown">
+        <% current_label = t(I18n.locale, scope: "locales", default: I18n.locale.to_s.upcase) %>
+        <button
+          data-action="click->dropdown#toggle"
+          class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+          aria-label="<%= t('select_language', default: 'Select Language') %>"
+        >
+          <%= heroicon "language", options: { class: "w-5 h-5" }, variant: :outline %>
+          <span><%= current_label %></span>
+          <%= heroicon "chevron-down", options: { class: "w-4 h-4" }, variant: :outline %>
+        </button>
 
+        <!-- Dropdown Menu -->
+        <div
+          data-dropdown-target="menu"
+          class="hidden absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-white border border-gray-200 py-1 z-50"
+        >
+          <% I18n.available_locales.each do |locale| %>
+            <% active = I18n.locale == locale %>
+            <% label = t(locale, scope: "locales", default: locale.to_s.upcase) %>
+            
+            <%= link_to url_for(locale: locale),
+                        class: "flex items-center justify-between px-4 py-2 text-sm #{active ? 'bg-gray-50 text-black font-medium' : 'text-gray-700 hover:bg-gray-100'}",
+                        hreflang: locale,
+                        lang: locale,
+                        data: { turbo: false } do %>
+              <span><%= label %></span>
               <% if active %>
-                <span
-                  aria-current="page"
-                  class="inline-flex items-center rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-sm font-medium text-gray-900"
-                  title="<%= label %>"
-                >
-                  <%= label %>
-                </span>
-              <% else %>
-                <%= link_to label,
-                            url_for(locale: locale),
-                            class: "inline-flex items-center rounded-full border border-gray-300 px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50 transition",
-                            hreflang: locale,
-                            lang: locale,
-                            data: { turbo: false } %>
+                <%= heroicon "check", options: { class: "w-4 h-4 text-green-600" }, variant: :outline %>
               <% end %>
-            </li>
+            <% end %>
           <% end %>
-        </ul>
-      </nav>
+        </div>
+      </div>
     </div>
   </header>
 
