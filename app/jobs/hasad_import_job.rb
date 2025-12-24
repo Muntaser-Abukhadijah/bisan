@@ -149,19 +149,7 @@ class HasadImportJob < ApplicationJob
   end
 
   def insert_articles!(rows)
-    result = Article.insert_all(rows, unique_by: %i[source_url])
-    
-    # Trigger Meilisearch indexing for newly inserted articles
-    # insert_all bypasses callbacks, so we must manually index
-    if result.rows.any?
-      newly_inserted_ids = result.rows.map { |row| row[0] }  # First column is ID
-      newly_inserted = Article.where(id: newly_inserted_ids)
-      
-      # Index to Meilisearch
-      Article.index_documents(newly_inserted)
-      puts "[HasadImport] Indexed #{newly_inserted.count} articles to Meilisearch"
-    end
-    
+    Article.insert_all(rows, unique_by: %i[source_url])
     rows.size
   rescue => e
     Rails.logger.error "[HasadImport] insert_articles failed: #{e.class} #{e.message}"
